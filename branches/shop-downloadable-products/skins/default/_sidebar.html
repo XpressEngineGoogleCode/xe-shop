@@ -1,0 +1,36 @@
+<!--@if(strpos(Context::get('act'),'dispMember') === false )-->
+<!--%import("categories.js")-->
+
+<div id="body-left-sidebar">
+    <div class="body-left-panel">
+        <h3>Categories</h3>
+        <div class="body-left-panel-content">
+            {$HTML_tree}
+        </div>
+    </div>
+    <div id="newsletter" class="body-left-panel">
+        <h3>Newsletter</h3>
+        <div class="body-left-panel-content clearfix">
+            <p>
+            <!--@if(Context::get('logged_info'))-->
+                <!--@ $logged_info = Context::get('logged_info');--> <!--@end-->
+                <!--@if($logged_info->newsletter == 'Y')-->
+                    You are already subscribed to our newsletter. <a href="{getUrl('','act','procShopSignToNewsletter','member_srl',$logged_info->member_srl,'email_address',$logged_info->email_address,'newsletter','N')}">Unsubscribe</a>
+                <!--@else-->
+                    <a href="{getUrl('','act','procShopSignToNewsletter','member_srl',$logged_info->member_srl,'email_address',$logged_info->email_address,'newsletter','Y')}">Subscribe</a>
+                <!--@end-->
+            <!--@else-->
+                In order to sign up to our newsletter you have to <a href="{getUrl('','act','dispMemberLoginForm')}">login</a>
+            <!--@end-->
+            </p>
+        </div>
+    </div>
+    <div class="body-left-panel">
+        <div class="body-left-panel-content a-center" style="border-top:1px solid #cacaca;">
+            <a href="http://www.xpressengine.org/"><img src="img/banner.jpg" alt="Built with XpressEngine" title="Built with XpressEngine" style="border: 0;"/></a>
+        </div>
+    </div>
+</div>
+<!--@else-->
+<include target="_my_account_sidebar.html" />
+<!--@end-->

@@ -1,0 +1,111 @@
+<!--#include("_tool_header.html")-->
+
+<script type="text/javascript">
+
+    /**
+     * We iterate through all the active gateways settings
+     * links and make the settings collapsible.
+     */
+    jQuery(document).ready(function($){
+
+        $('.pg').each(function(){
+
+            $(this).click(function(e) {
+
+                e.preventDefault();
+                $(this).closest('td').next('td').children('.pgSettings').toggle('fast');
+
+            })
+
+        })
+
+    });
+
+</script>
+
+<div id="content">
+
+    <div class="dashboardHeader">
+        <h3 class="h3">{$lang->shop_second_menus[7]['dispShopToolManagePaymentMethods']}</h3>
+    </div>
+
+    <div cond="$XE_VALIDATOR_MESSAGE" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
+        <p>{$XE_VALIDATOR_MESSAGE}</p>
+    </div>
+
+    <table class="tableData">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <input type="checkbox" class="inputCheck" onclick="jQuery('input.boxlist').click()" />
+                </th>
+                <th scope="col">{$lang->gateway_settings}</th>
+                <th scope="col" class="title">{$lang->name}</th>
+                <th scope="col" class="center">{$lang->status}</th>
+                <th scope="col">{$lang->cmd_delete}</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!--@if(count((array)$payment_methods))-->
+            <!--@foreach($payment_methods as $payment_method)-->
+                <tr>
+                    <td>
+                        <input type="checkbox" name="payment_method_srl" value="" class="inputCheck boxlist" />
+                    </td>
+                    <td>
+                        <span class="btnGray medium">
+                            <a href="{getUrl('act','dispShopToolEditPaymentMethod','name',$payment_method->name)}">
+                                {$lang->gateway_settings}
+                            </a>
+                        </span>
+                    </td>
+                    <td>
+                        {$payment_method->display_name}
+                        <div class="pgSettings">
+
+                        </div>
+                    </td>
+                    <td>
+                        <!--@if($payment_method->status)-->
+                            <a href="{getUrl('act','procUpdateShopDeactivatePaymentMethod','name',$payment_method->name)}">{$lang->deactivate}</a>
+                        <!--@else-->
+                            <a href="{getUrl('act','procUpdateShopActivatePaymentMethod','name',$payment_method->name)}">{$lang->activate}</a>
+                        <!--@end-->
+                    </td>
+                    <td>
+                        <a href="{getUrl('act','procUpdateShopDeletePaymentMethod','name',$payment_method->name)}">{$lang->cmd_delete}</a>
+                    </td>
+                </tr>
+            <!--@end-->
+        <!--@else-->
+            <tr>
+                <td colspan="4">{$lang->no_gateways}</td>
+            </tr>
+        <!--@end-->
+        </tbody>
+    </table>
+
+    <h4 class="dashboardH4">{$lang->upload_new_pg}</h4>
+
+    <form enctype="multipart/form-data" action="" method="post">
+        <input type="hidden" name="act" value="procShopUploadPaymentPlugin" />
+        <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+        <p>
+            <label for="uploadedPaymentGateway">{$lang->choose_file_to_upload}:</label>
+            <input id="uploadedPaymentGateway" name="uploadedPaymentGateway" type="file" />
+        </p>
+        <span class="btnGray medium"><input type="submit" value="{$lang->upload_file}" /></span>
+    </form>
+    <br />
+
+    <h4 class="dashboardH4">{$lang->sanitise_gateway}</h4>
+    <p><span class="btnGray medium"><a href="{getURL('act', 'procSanitizePaymentMethods', 'vid', '$vid')}">{$lang->sanitise_gateway}</a></span></p>
+
+</div>
+
+<!-- Extension -->
+<!--#include("_tool_menu.html")-->
+<!-- Extension -->
+
+<!--#include("_tool_footer.html")-->
+

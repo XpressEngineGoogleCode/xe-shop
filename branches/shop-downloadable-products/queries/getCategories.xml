@@ -1,0 +1,13 @@
+<query id="getCategories" action="select">
+    <tables>
+        <table name="shop_categories" />
+    </tables>
+    <columns></columns>
+    <conditions>
+        <condition operation="equal" column="module_srl" var="module_srl" filter="number" notnull="notnull" />
+    </conditions>
+    <navigation>
+        <index default="parent_srl" var="parent_srl" order="asc" />
+        <index default="list_order" var="list_order" order="asc" />
+    </navigation>
+</query>

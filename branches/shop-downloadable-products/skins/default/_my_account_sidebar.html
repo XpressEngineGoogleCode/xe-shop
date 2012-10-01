@@ -1,0 +1,21 @@
+<div id="body-left-sidebar">
+    <div class="body-left-panel">
+        <h3>My Account</h3>
+        <div class="body-left-panel-content">
+            <ul>
+                <li <!--@if($act=='dispShopMyAccount')-->class="active"<!--@end-->>
+                    <span><a href="{getUrl('','act','dispShopMyAccount')}">Dashboard</a></span>
+                </li>
+                <li <!--@if($act=='dispMemberInfo')-->class="active"<!--@end-->>
+                    <span><a href="{getUrl('','act','dispMemberInfo')}">Account Info</a></span>
+                </li>
+                <li <!--@if($act=='dispShopAddressBook')-->class="active"<!--@end-->>
+                    <span><a href="{getUrl('','act','dispShopAddressBook')}">Address book</a></span>
+                </li>
+                <li <!--@if($act=='dispShopMyOrders')-->class="active"<!--@end-->>
+                    <span><a href="{getUrl('','act','dispShopMyOrders')}">My Orders</a></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
